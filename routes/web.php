@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/login', function () {
+    return view('admin.admin');
+});
+//Route::get('/', function () {
+//    return view('layout.main');
+//});
+
+Route::middleware('auth:api')->group(function () {
+    Route::prefix('produto')->group(function () {
+        Route::get('/listar', function () {
+            return view('produto.listar');
+        });
+        Route::get('/cadastrar', function () {
+            return view('produto.cadastrar');
+        });
+    });
 });

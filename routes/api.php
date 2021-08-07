@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', [UsuarioController::class, 'login']);
+Route::post('/login', [UsuarioController::class, 'login'])->name('login');
 Route::post('/cadastro', [UsuarioController::class, 'cadastrar']);
 
 
@@ -28,8 +28,8 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::prefix('produto')->group(function () {
-        Route::post('/cadastrar', [ProdutoController::class, 'cadastrar']);
-        Route::get('/listar', [ProdutoController::class, 'listar']);
+        Route::post('/cadastrar', [ProdutoController::class, 'cadastrar'])->name('produto.cadastrar');
+        Route::get('/listar', [ProdutoController::class, 'listar'])->name('produto.listar');
     });
 
     Route::prefix('categoria')->group(function () {
