@@ -1,40 +1,33 @@
-@extends('layout.main')
+@extends('layout.app')
 
 @section('title', 'Projeto Treinamento Ftt')
 
 @section('content')
 
-<div class="container">
-    <h1>Tela de Listar Produtos</h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="container-fluid">
+        <h1>Tela de Listar Produtos</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Valor</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($produtos as $produto)
+                <tr>
+                    <td>{{$produto->id}}</td>
+                    <td>{{$produto->nome}}</td>
+                    <td>{{$produto->categoria->descricao ?? '---'}}</td>
+                    <td>{{$produto->descricao}}</td>
+                    <td>{{$produto->valor_show}}</td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
 

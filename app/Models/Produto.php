@@ -31,6 +31,18 @@ class Produto extends Model
 
     public function categoria()
     {
-        return $this->hasOne(Categoria::class, 'id', 'categoria_id');
+        return $this->belongsTo(Categoria::class, 'categoria_id');
+    }
+
+    public function setValorAttribute($v)
+    {
+        $v = str_replace('.','',$v);
+        $v = str_replace(',','',$v);
+        $this->attributes['valor'] = $v > 0 ? $v/100 : 0;
+    }
+
+    public function getValorShowAttribute()
+    {
+        return 'R$ '.number_format($this->valor,2,',','.');
     }
 }

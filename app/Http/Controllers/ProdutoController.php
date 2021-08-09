@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -23,7 +24,7 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function cadastrar(Request $request)
+    public function salvar(Request $request)
     {
         $data = $request->all();
 
@@ -35,7 +36,7 @@ class ProdutoController extends Controller
         ]);
 
         if ($validacao->fails()) {
-            return ['status' => false, 'validacao' => true, "erros" => $validacao->errors()];
+            return redirect()->back()->withInput($data);
         }
 
         $produto = new Produto();
@@ -47,9 +48,16 @@ class ProdutoController extends Controller
 
         $produto->save();
 
-        return ['status' => true, "produto" => $produto];
+        return redirect()->route('produto.listar');
 
 
+    }
+
+    public function cadastrar()
+    {
+        $categorias = Categoria::pluck('descricao','id');
+
+        return view('produto.cadastrar',compact('categorias'));
     }
 
     /**
@@ -60,10 +68,12 @@ class ProdutoController extends Controller
      */
     public function listar(Request $request)
     {
-        $query = Produto::with('categoria')
+        $produtos = Produto::with('categoria')
             ->paginate(10);
 
-        return ['status' => true, "produtos" => $query];
+        return view('produto.listar',compact('produtos'));
+
+//        return ['status' => true, "produtos" => $query];
     }
 
     /**

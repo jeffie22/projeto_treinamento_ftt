@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\{
-    CategoriaController,
-    ProdutoController,
-    UsuarioController,
-};
+//use App\Http\Controllers\{
+//    CategoriaController,
+//    ProdutoController,
+//    UsuarioController,
+//};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,23 +18,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', [UsuarioController::class, 'login'])->name('login');
-Route::post('/cadastro', [UsuarioController::class, 'cadastrar']);
-
-
-Route::middleware('auth:api')->group(function () {
-    Route::prefix('user')->group(function () {
-        Route::get('/', [UsuarioController::class, 'usuario']);
-    });
-
-    Route::prefix('produto')->group(function () {
-        Route::post('/cadastrar', [ProdutoController::class, 'cadastrar'])->name('produto.cadastrar');
-        Route::get('/listar', [ProdutoController::class, 'listar'])->name('produto.listar');
-    });
-
-    Route::prefix('categoria')->group(function () {
-        Route::post('/cadastrar', [CategoriaController::class, 'cadastrar']);
-        Route::get('/listar', [CategoriaController::class, 'listar']);
-    });
-
-});
+//Route::post('/login', [UsuarioController::class, 'login'])->name('login');
+//Route::post('/cadastro', [UsuarioController::class, 'cadastrar']);
+//
+//
+//Route::middleware('auth:api')->group(function () {
+//    Route::prefix('user')->group(function () {
+//        Route::get('/', [UsuarioController::class, 'usuario']);
+//    });
+//
+//    Route::prefix('produto')->group(function () {
+//        Route::post('/cadastrar', [ProdutoController::class, 'cadastrar'])->name('produto.cadastrar');
+//        Route::get('/listar', [ProdutoController::class, 'listar'])->name('produto.listar');
+//    });
+//
+//    Route::prefix('categoria')->group(function () {
+//        Route::post('/cadastrar', [CategoriaController::class, 'cadastrar']);
+//        Route::get('/listar', [CategoriaController::class, 'listar']);
+//    });
+//
+//});
